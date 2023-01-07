@@ -11,14 +11,14 @@ class Entity(pygame.sprite.Sprite):
         self.rect.center = (randint(1 + self.dimension[0], screen_d[0] - 1 - self.dimension[0]), randint(1 + self.dimension[1], screen_d[1] - 1 - self.dimension[1]))
         self.screen = screen_d
 
-    def paper(self):
-        self.image = pygame.transform.scale(pygame.image.load('assets/paper.png'), (self.dimension[0], self.dimension[1])).convert_alpha()
+    def paper(self, image):
+        self.image = pygame.transform.scale(image, (self.dimension[0], self.dimension[1])).convert_alpha()
 
-    def rock(self):
-        self.image = pygame.transform.scale(pygame.image.load('assets/rock.png'), (self.dimension[0], self.dimension[1])).convert_alpha()
+    def rock(self, image):
+        self.image = pygame.transform.scale(image, (self.dimension[0], self.dimension[1])).convert_alpha()
 
-    def scissors(self):
-        self.image = pygame.transform.scale(pygame.image.load('assets/scissors.png'), (self.dimension[0], self.dimension[1])).convert_alpha()
+    def scissors(self, image):
+        self.image = pygame.transform.scale(image, (self.dimension[0], self.dimension[1])).convert_alpha()
 
     def update(self, attack, escape):
         distance = randint(1, 3)

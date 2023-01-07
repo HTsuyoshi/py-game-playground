@@ -12,6 +12,9 @@ from Entity import Entity
 FLAGS = DOUBLEBUF
 DISPLAYSURF = pygame.display.set_mode((SCREEN,SCREEN), FLAGS, 16)
 pygame.event.set_allowed([QUIT])
+IMG_ROCK = pygame.image.load('assets/rock.png')
+IMG_PAPER = pygame.image.load('assets/paper.png')
+IMG_SCISSORS = pygame.image.load('assets/scissors.png')
 
 FPS = pygame.time.Clock()
 
@@ -23,19 +26,19 @@ if __name__ == '__main__':
     rocks = pygame.sprite.Group()
     for _ in range(randint(10, 30)):
         r = Entity((SPRITE, SPRITE), (SCREEN, SCREEN))
-        r.rock()
+        r.rock(IMG_ROCK)
         rocks.add(r)
 
     papers = pygame.sprite.Group()
     for _ in range(randint(10, 30)):
         p = Entity((SPRITE, SPRITE), (SCREEN, SCREEN))
-        p.paper()
+        p.paper(IMG_PAPER)
         papers.add(p)
 
     scissors = pygame.sprite.Group()
     for _ in range(randint(10, 30)):
         s = Entity((SPRITE, SPRITE), (SCREEN, SCREEN))
-        s.scissors()
+        s.scissors(IMG_SCISSORS)
         scissors.add(s)
 
     while 1:
@@ -45,7 +48,7 @@ if __name__ == '__main__':
             r.update(attack=scissors, escape=papers)
             if pygame.sprite.spritecollideany(r, papers):
                 rocks.remove(r)
-                r.paper()
+                r.paper(IMG_PAPER)
                 papers.add(r)
             r.draw(DISPLAYSURF)
 
@@ -53,7 +56,7 @@ if __name__ == '__main__':
             p.update(attack=rocks, escape=scissors)
             if pygame.sprite.spritecollideany(p, scissors):
                 papers.remove(p)
-                p.scissors()
+                p.scissors(IMG_SCISSORS)
                 scissors.add(p)
             p.draw(DISPLAYSURF)
 
@@ -61,7 +64,7 @@ if __name__ == '__main__':
             s.update(attack=papers, escape=rocks)
             if pygame.sprite.spritecollideany(s, rocks):
                 scissors.remove(s)
-                s.rock()
+                s.rock(IMG_ROCK)
                 rocks.add(s)
             s.draw(DISPLAYSURF)
 
