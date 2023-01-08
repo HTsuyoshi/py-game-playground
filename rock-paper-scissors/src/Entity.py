@@ -31,10 +31,14 @@ class Entity(pygame.sprite.Sprite):
     def fix_move(self, axis: tuple[int, int]):
         y = axis[1]
         x = axis[0]
-        if y + self.rect.centery + (self.dimension[1] / 2) >= self.screen[1] or y + self.rect.centery - (self.dimension[1] / 2) <= 0:
-            y = - y
-        if x + self.rect.centerx + (self.dimension[0] / 2) >= self.screen[0] or x + self.rect.centerx - (self.dimension[0] / 2) <= 0:
-            x = - x
+        if y + self.rect.centery + (self.dimension[1] / 2) >= self.screen[1]:
+            y = - abs(y)
+        if y + self.rect.centery - (self.dimension[1] / 2) <= 0:
+            y = abs(y)
+        if x + self.rect.centerx + (self.dimension[0] / 2) >= self.screen[0]:
+            x = - abs(x)
+        if x + self.rect.centerx - (self.dimension[0] / 2) <= 0:
+            x = abs(x)
         return (x, y)
 
     def random_walk(self, follow: int, distance: int):
